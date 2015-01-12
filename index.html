@@ -1,0 +1,56 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>回顶部</title>
+<style type="text/css">
+#box{ width:90%; margin:0 auto;}
+#box img{ width:100%;}
+#btn-top{ display:none; width:40px; height:40px; background:url(images/top_bg.png) no-repeat left top; position:fixed; bottom:20px; right:10px;}
+#btn-top:hover{ background:url(images/top_bg.png) no-repeat left -40px;}
+</style>
+<script type="text/javascript">
+window.onload=function(){
+	var btn_top=document.getElementById('btn-top');
+	//获得页面的可视高度
+	var cHeight=document.documentElement.clientHeight;
+
+	var timer=null;
+	var isTop=true;
+	/*这个是为了让在置顶滚动的过程中，可以滚动鼠标来控制停止的位置*/
+	window.onscroll=function(){
+		var osTop=document.documentElement.scrollTop || document.body.scrollTop;/*兼容IE和谷歌浏览器*/
+		if(osTop>cHeight){
+			btn_top.style.display='block';
+			}
+		if(!isTop){
+			clearInterval(timer);
+			}
+			isTop=false;
+		}
+	/*点击置顶功能*/	
+	btn_top.onclick=function(){
+		//设置定时器
+	   timer=setInterval(function(){
+		var osTop=document.documentElement.scrollTop || document.body.scrollTop;/*兼容IE和谷歌浏览器*/
+		var step=Math.floor(-osTop/10);//为了让滚动的速度越来越慢
+       //获得滚动条距离顶部的距离		
+	   document.documentElement.scrollTop=document.body.scrollTop+=step;
+	   isTop=true;
+	   if(osTop<=0){
+		clearInterval(timer);
+		}},20)
+		}
+	
+	}
+
+</script>
+</head>
+
+<body>
+<div id="box">
+<img src="images/tb_bg.jpg"/>
+</div>
+<a href="javascript:;" id="btn-top"></a>
+</body>
+</html>
