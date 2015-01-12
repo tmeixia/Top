@@ -23,6 +23,9 @@ window.onload=function(){
 		if(osTop>cHeight){
 			btn_top.style.display='block';
 			}
+		else if(osTop<=cHeight){
+			btn_top.style.display='none';
+			}
 		if(!isTop){
 			clearInterval(timer);
 			}
